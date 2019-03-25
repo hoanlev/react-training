@@ -3,11 +3,12 @@ import './App.css';
 import Counter11 from './Counter1.1'
 import Counter12 from './Counter1.2'
 import Counter2 from './Counter2'
-
+import DataTable from './table'
 
 
 
 class App extends Component {
+
 
 
   render() {
@@ -19,6 +20,8 @@ class App extends Component {
         <Counter12 />
         <h3>Parent-Child</h3>
         <Counter2 count={15} />
+
+        <DataTable />
       </>
     );
   }
