@@ -14,14 +14,7 @@ class App extends Component {
   render() {
     return (
       <>
-        <h3>Class + SetState</h3>
-        <Counter11 />
-        <h3>Function</h3>
-        <Counter12 />
-        <h3>Parent-Child</h3>
-        <Counter2 count={15} />
-        <h3>Get data table</h3>
-        <DataTable />
+        Homepage
       </>
     );
   }
