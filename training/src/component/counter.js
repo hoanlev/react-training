@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Button} from 'react-bootstrap'
 
 class CounterDisplayer extends Component {
     constructor(props) {
@@ -47,12 +48,11 @@ class CounterComponent extends Component {
             <div>
                 <p>Count: {this.state.counter}</p>
                 <CounterDisplayer counter={this.state.counter}></CounterDisplayer>
-                <button type="button" onClick={this.onIncrease}>Increase</button>
-                <button type="button" onClick={this.onDecrease}>Decrease</button>
-                <button type="button" onClick={this.onIncrease_object}>Increase (object)</button>
-                <button type="button" onClick={this.onDecrease_object}>Decrease (object)</button>
-                <button type="button" onClick={this.onIncrease_honest}>onIncrease honest</button>
-
+                <Button type="button" onClick={this.onIncrease}>Increase</Button>
+                <Button type="button" onClick={this.onDecrease}>Decrease</Button>
+                <Button type="button" onClick={this.onIncrease_object}>Increase (object)</Button>
+                <Button type="button" onClick={this.onDecrease_object}>Decrease (object)</Button>
+                <Button type="button" onClick={this.onIncrease_honest}>onIncrease honest</Button>
             </div>
         );
     }

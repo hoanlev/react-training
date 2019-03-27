@@ -1,34 +1,49 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Route, NavLink, BrowserRouter as Router } from 'react-router-dom'
+import { Route, NavLink, BrowserRouter as Router, Switch } from 'react-router-dom'
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import CounterComponent from './component/counter'
 import TableComponent from './component/table'
 import Notfound from './component/not-found'
-import { ListGroup } from 'react-bootstrap'
+import { ListGroup, Container, Row, Col } from 'react-bootstrap'
 
 const routing = (
     <Router>
         <div>
             <ListGroup>
-                <ListGroup.Item>
-                    <NavLink exact activeClassName="active" to="/">Home</NavLink>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                    <NavLink activeClassName="active" to="/counter">Counter</NavLink>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                    <NavLink activeClassName="active" to="/table">Table</NavLink>
-                </ListGroup.Item>
+                <Container>
+                    <Row>
+                        <Col>
+                            <ListGroup.Item variant='primary'>
+                                <NavLink exact activeClassName="active" to="/">Home</NavLink>
+                            </ListGroup.Item>
+                        </Col>
+                        <Col>
+                            <ListGroup.Item>
+                                <NavLink activeClassName="active" to="/counter">Counter</NavLink>
+                            </ListGroup.Item>
+                        </Col>
+                        <Col>
+                            <ListGroup.Item>
+                                <NavLink activeClassName="active" to="/table">Table</NavLink>
+                            </ListGroup.Item>
+                        </Col>
+                        <Col>
+                        </Col>
+                    </Row>
+                </Container>
             </ListGroup>
+            <div className = 'p-5'></div>
+        <Switch >
             <Route exact path="/" component={App} />
             <Route path="/counter" component={CounterComponent} />
             <Route path="/table" component={TableComponent} />
             <Route component={Notfound} />
+        </Switch>
         </div>
-    </Router>
+    </Router >
 )
 ReactDOM.render(routing, document.getElementById('root'));
 

@@ -63,7 +63,7 @@ class TableComponent extends Component {
     componentDidMount() {
         this.featchUserData();
     }
-    
+
     featchUserData() {
         fetch('https://jsonplaceholder.typicode.com/todos')
             .then(res => res.json())
@@ -99,7 +99,7 @@ class TableComponent extends Component {
             (this.state.error ? (<div>There are errors from this endpoint.</div>) :
                 (
                     <div>
-                        <input type="text" placeholder="Filter by title" onChange={this.filterByTitle} ></input>
+                        <input type="text" class="form-control" placeholder="Filter by title" onChange={this.filterByTitle} ></input>
                         <UserTable data={this.state.usersFitKeywords}></UserTable>
                     </div>
                 )) : (<div>Is Loading..</div >)
