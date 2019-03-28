@@ -17,6 +17,14 @@ const Header = () => {
       <NavLink to="/table" activeStyle={activeStyle}>
         Table
       </NavLink>
+      {" | "}
+      <NavLink to="/form" activeStyle={activeStyle}>
+        Login Form
+      </NavLink>
+      {" | "}
+      <NavLink to="/child" activeStyle={activeStyle}>
+        Route Child
+      </NavLink>
     </nav>
   );
 };
