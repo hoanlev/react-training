@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button} from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 
 class CounterDisplayer extends Component {
     constructor(props) {
@@ -19,7 +19,14 @@ class CounterDisplayer extends Component {
         );
     }
 }
-
+class C2 extends Component {
+    shouldComponentUpdate(m, n) {
+        console.log(this, m, n);
+    }
+    render(){
+        return (<div></div>)
+    }
+}
 class CounterComponent extends Component {
     constructor(props) {
         super(props);
@@ -47,6 +54,7 @@ class CounterComponent extends Component {
         return (
             <div>
                 <p>Count: {this.state.counter}</p>
+                <C2/>
                 <CounterDisplayer counter={this.state.counter}></CounterDisplayer>
                 <Button type="button" onClick={this.onIncrease}>Increase</Button>
                 <Button type="button" onClick={this.onDecrease}>Decrease</Button>
