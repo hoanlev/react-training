@@ -1,1 +1,1 @@
-export const getCount = storez => storez.memberReducer;
+export const getCount = storez => storez.counter;
