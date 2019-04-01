@@ -1,1 +1,1 @@
-export const getCount = storez => storez.counter;
+export const getCount = stores => stores.counter;

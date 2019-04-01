@@ -6,3 +6,10 @@ export const addCounter = content => ({
         content
     }
 });
+
+export const removeCounter = content => ({
+    type: REMOVE_COUNTER,
+    payload: {
+        content
+    }
+});

@@ -1,32 +1,31 @@
-import {applyMiddleware, createStore} from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import axios from 'axios';
 import thunk from 'redux-thunk';
 const inititalState = {
-    user:[],
+    user: [],
     fetching: false
 }
-const reducer = (state=inititalState, action) => {
-    switch(action.type){
-        case 'FETCH_USER_BEGIN':{
-            return {...state, fetching:true};
+const reducer = (state = inititalState, action) => {
+    switch (action.type) {
+        case 'FETCH_USER_BEGIN': {
+            return { ...state, fetching: true };
             break;
         }
         case 'DONE': {
-            return {...state, user: action.payload}
+            return { ...state, user: action.payload }
             break;
         }
-        return state;
+            return state;
     }
 }
 const middleware = applyMiddleware(thunk);
 const store = createStore(reducer, middleware);
-store.subscribe(()=>{
-    console.log('change', store.getState());
+store.subscribe(() => {
 });
-store.dispatch((dispatch)=>{
-    dispatch({type: 'FETCH_USER_BEGIN'});
+store.dispatch((dispatch) => {
+    dispatch({ type: 'FETCH_USER_BEGIN' });
     axios.get('https://jsonplaceholder.typicode.com/todos').
-    then((response)=>{
-        dispatch({type: 'DONE',payload: response.data});
-    })
+        then((response) => {
+            dispatch({ type: 'DONE', payload: response.data });
+        })
 })
