@@ -9,6 +9,7 @@ import DataTable from "./components/tabledata/table";
 import PageNotFound from "./not-found";
 import LoginForm from "./components/form/LoginForm";
 import "./components/firebase/firebase";
+import reduxCounter from "./components/redux/redux-counter";
 
 function ChildRoute({ match }) {
   console.log("ChildRoute", match);
@@ -58,7 +59,7 @@ class App extends Component {
         <Headers />
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route path="/counter" component={Counter11} />
+          <Route path="/counter" component={reduxCounter} />
           <Route
             path="/table"
             render={() =>
