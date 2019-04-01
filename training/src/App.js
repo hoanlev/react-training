@@ -8,6 +8,7 @@ import Counter11 from "./components/counters/Counter1.1";
 import DataTable from "./components/tabledata/table";
 import PageNotFound from "./not-found";
 import LoginForm from "./components/form/LoginForm";
+import "./components/firebase/firebase";
 
 function ChildRoute({ match }) {
   console.log("ChildRoute", match);
