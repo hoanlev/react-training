@@ -1,4 +1,4 @@
-import { ADD_COUNTER, REMOVE_COUNTER } from '../action/counterType'; 
+import { ADD_COUNTER, REMOVE_COUNTER } from '../action/type'; 
 
 export const addCounter = content => ({
     type: ADD_COUNTER,

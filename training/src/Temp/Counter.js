@@ -8,7 +8,7 @@ class Couter extends Component {
         });
     }
     onHandleDecrease = () => {
-        this.setState((state, prop) => {
+        this.setState((state) => {
             return {
                 count: state.count - 1
             }

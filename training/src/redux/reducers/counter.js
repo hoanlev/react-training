@@ -1,4 +1,4 @@
-import { ADD_COUNTER, REMOVE_COUNTER } from '../action/counterType'; 
+import { ADD_COUNTER, REMOVE_COUNTER } from '../action/type'; 
 
 const initState = {
     count: 0
