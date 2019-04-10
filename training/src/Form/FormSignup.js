@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
 import { FormErrors } from './form-error';
-import './form.css';
+import {connect} from 'react-redux';
+//import './form.css';
+import {addUser} from '../redux/action/login';
 
-class Form extends Component {
+class FormSignUp extends Component {
     constructor (props) {
       super(props);
       this.state = {
+        username: '',
         email: '',
         password: '',
-        formErrors: {email: '', password: ''},
+        rePassword: '',
+        formErrors: {username: '', email: '', password: '', rePassword: ''},
+        usernameValid: false,
         emailValid: false,
         passwordValid: false,
+        rePasswordValid: false,
         formValid: false
       }
     }
@@ -18,7 +24,6 @@ class Form extends Component {
     handleUserInput = (e) => {
       const name = e.target.name;
       const value = e.target.value;
-      console.log(name);
       this.setState({[name]: value},
                     () => { this.validateField(name, value) });
     }
@@ -27,8 +32,13 @@ class Form extends Component {
       let fieldValidationErrors = this.state.formErrors;
       let emailValid = this.state.emailValid;
       let passwordValid = this.state.passwordValid;
-  
+      let usernameValid = this.state.usernameValid;
+      let rePasswordValid = this.state.rePasswordValid;
       switch(fieldName) {
+        case 'username':
+            usernameValid = value.trim().length >0;
+            fieldValidationErrors.username = usernameValid ? '' : ' please enter username';
+            break;
         case 'email':
           emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
           fieldValidationErrors.email = emailValid ? '' : ' is invalid';
@@ -36,6 +46,11 @@ class Form extends Component {
         case 'password':
           passwordValid = value.length >= 6;
           fieldValidationErrors.password = passwordValid ? '': ' is too short';
+          break;
+        case 'rePassword':
+          rePasswordValid = value === this.state.password;
+          console.log(rePasswordValid);
+          fieldValidationErrors.rePassword = rePasswordValid ? '': 'please re-enter password';
           break;
         default:
           break;
@@ -55,15 +70,30 @@ class Form extends Component {
     }
     handleSubmit = (e) =>{
       e.preventDefault();
-      console.log(this.state);
+      const {username, email, password} = this.state;
+      const user = {
+        username: username,
+        email: email,
+        password: password
+      }
+      this.props.addUser(user);
+        alert('add success');
+        window.location = '/login';
     }
   
     render () {
       return (
-        <form className="demoForm" onSubmit={this.handleSubmit}>
-          <h2>Sign up</h2>
+        <form onSubmit={this.handleSubmit}>
+          <h2>Sign Up</h2>
           <div className="panel panel-default">
             <FormErrors formErrors={this.state.formErrors} />
+          </div>
+          <div className={`form-group ${this.errorClass(this.state.formErrors.username)}`}>
+            <label htmlFor="email">Username</label>
+            <input type="text" required className="form-control" name="username"
+              placeholder="Username"
+              value={this.state.username}
+              onChange={this.handleUserInput}  />
           </div>
           <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}>
             <label htmlFor="email">Email address</label>
@@ -79,10 +109,20 @@ class Form extends Component {
               value={this.state.password}
               onChange={this.handleUserInput}  />
           </div>
+          <div className={`form-group ${this.errorClass(this.state.formErrors.rePassword)}`}>
+            <label htmlFor="rePassword">Re-Password</label>
+            <input type="password" className="form-control" name="rePassword"
+              placeholder="Re-Password"
+              value={this.state.rePassword}
+              onChange={this.handleUserInput}  />
+          </div>
           <button type="submit" className="btn btn-primary" disabled={!this.state.formValid}>Sign up</button>
         </form>
       )
     }
   }
   
-  export default Form;
+  export default connect(
+    null,
+    {addUser}
+)(FormSignUp);

@@ -1,1 +1,0 @@
-export const getCount = storez => storez.counter;

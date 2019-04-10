@@ -1,0 +1,1 @@
+export const getUserLogin = store => store.User;

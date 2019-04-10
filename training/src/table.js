@@ -1,55 +1,71 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
+
 class Table extends Component {
-    state = { 
-        data:null,
-        isLoading: true,
-        filter: '',
-        count:1
-     }
-    componentDidMount() {
-        fetch('https://jsonplaceholder.typicode.com/todos')
-        .then(response => response.json())
-        .then(data => this.setState({data, isLoading: false}));
+    constructor(props) {
+        super(props);
+        this.state = { 
+            filter: '',
+            error: null,
+            isLoaded: false,
+            items:[]
+         };
     }
-    handleFilter = (e) => {
-        console.log(e);
-        this.setState({filter: e});
-       
+
+    componentDidMount() {
+        fetch("https://jsonplaceholder.typicode.com/todos")
+        .then(res => res.json())
+        .then(
+            (result) => {
+                this.setState({
+                    isLoaded: true,
+                    items: result
+                });
+            },
+            (error) => {
+                this.setState({
+                    isLoaded: true,
+                    error
+                });
+            }
+        )
+    }
+
+    handleFilter =(text)=>{
+        this.setState({filter: text});
     }
     render() { 
-        console.log('render');
-        if(this.state.isLoading) {
-            return ('Loading...');
+        const {filter,error, isLoaded,items} = this.state;
+        if(error){
+            return <div> Error: {error.message}</div>;
         }
-        return ( <div className="col-md-8 m-4">
-            <div className='m-2'>
-            <span>{this.state.count >1 ? 'lon hon mot':'be hon mot'}</span>
-                <span>Filter: </span>
-                <input type='text' onChange={e=>this.handleFilter(e.target.value)}/>
-            </div>
-            <table id="customers">
-                <thead>
-                    <tr>
-                        <td>ID</td>
-                        <td>Title</td>
-                        <td>Complete</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    {   
-                        this.state.data.filter(item => {
-                            return item.title.includes(this.state.filter);
-                        }).map((item, index) => {
-                        return (
-                            <tr key={index}><td>{item.id}</td>
-                                <td>{item.title}</td>
-                                <td>{item.completed ? 'Completed': 'Not Completed'}</td>
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
-        </div> );
+        else if (!isLoaded) {
+            return <div>Loading...</div>;
+        }else{
+            return ( 
+                <div>
+                    <span>Filter:</span>
+                    <input type='text' onChange={event=>this.handleFilter(event.target.value)}/>
+                    <table>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Completed</th>
+                        </tr>
+                        {
+                            items.filter(item => {
+                                return item.title.includes(filter);
+                            }).map((item, index) => (
+                                <tr key={index}>
+                                    <td>{item.id}</td>
+                                    <td>{item.title}</td>
+                                    <td>{item.completed}</td>
+                                </tr>
+                              ))
+                        }
+                    </table>
+                </div>
+            );
+        }
     }
 }
  
